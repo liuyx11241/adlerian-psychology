@@ -1,5 +1,5 @@
 ---
-name: courage-to-be-disliked
+name: adlerian-psychology
 description: |
   阿德勒心理学（被讨厌的勇气）的全局路由 Skill。当用户遇到人际关系冲突、育儿焦虑、讨好型内耗、长期目标导致的焦虑、心理受害者陷阱，或希望了解阿德勒思想、解决现实痛苦时调用。这是一个元技能，负责分析用户的具体困境，并路由调用对应的子 Skill（目的论重构、课题分离、横向沟通、自我接纳与他者信赖、刹那舞步）。
 tags: [router, adler, courage, psychology, personal-growth]

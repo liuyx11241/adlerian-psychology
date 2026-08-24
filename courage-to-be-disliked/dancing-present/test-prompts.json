@@ -1,0 +1,52 @@
+{
+  "skill": "dancing-present",
+  "version": "0.1.0",
+  "source_book": "《被讨厌的勇气》 — 岸见一郎；古贺史健",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "我觉得现在的工作虽然极其痛苦，但为了3年后能攒够钱首付，我必须咬牙忍耐。每天都像在熬日子，感觉现在的生活只是在为未来做准备。",
+      "expected_behavior": "应激活 dancing-present, 诊断其“把人生当作爬山”的陷阱，引导其将目光收回到当下的充实感。",
+      "notes": "正面场景: 典型的为了未来牺牲现在、必须忍耐的线性人生观。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "我一直很想学画画转行当插画师，但是想着等我这份工作稍微闲一点，或者等我报了个好点的班再开始。现在就先算了吧。",
+      "expected_behavior": "应激活 dancing-present, 拆解其用“等时机到了”作为借口逃避当下的“人生谎言”。",
+      "notes": "正面场景: 等我...就... 的延后生活句式，用遥远的条件逃避此时此刻。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "终于考研上岸了！但是我昨天开心了半天，今天早上醒来突然觉得很空虚，感觉又得开始发愁找工作的事情，好像永远有个目标在前面追着我。",
+      "expected_behavior": "应激活 dancing-present, 点出其“destination sickness”，引导其把人生看作连续的刹那，享受此时此刻起舞的过程。",
+      "notes": "正面场景: 目标实现后的迷茫，焦虑未来，无法活在“一连串名为现在的刹那”。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "我们下半年的产品Roadmap出来了，帮我倒推一下里程碑，看看Q3需要预留多少研发资源。",
+      "expected_behavior": "不应激活本 skill, 应提供客观的项目管理和排期建议。",
+      "notes": "诱饵: 包含对未来的规划，但属于纯粹的客观资源安排，不是心理层面的未来焦虑或延后生活。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "我总是害怕在团队会议上发言，觉得大家都会觉得我很蠢，我也觉得自己能力根本比不上别人，非常自卑。",
+      "expected_behavior": "不应激活本 skill, 应激活 acceptance-and-trust。",
+      "notes": "跨 skill 混淆诱饵 (硬性要求): 害怕他人的评价和无法接纳自我，而非“为了未来忍耐当下”或拖延行动。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "我的公司下个月就要破产了，我现在连房租都交不起，非常焦虑下个月该怎么办。",
+      "expected_behavior": "不应激活本 skill 强行探讨哲学。应协助处理紧急的物理危机和避险行动预案。",
+      "notes": "边界: 面对即时的物理危险或紧迫的生存危机，不应简单用“享受当下过程”来回避现实的生存压力。"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "至少 3 条 should_trigger + 2 条 should_not_trigger + 1 条 edge_case。全部 should_not_trigger 必须通过 (诱饵容错为 0), 且其中至少 1 条是同书兄弟 skill 的场景 (跨 skill 混淆测试)。"
+}

@@ -1,0 +1,52 @@
+{
+  "skill": "separation-of-tasks",
+  "version": "0.1.0",
+  "source_book": "《被讨厌的勇气：“自我启发之父”阿德勒的哲学课》 — 【日】岸见一郎；古贺史健",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "我总是害怕我做了这个决定，我爸妈会生气，所以我一直拖着不敢辞职。",
+      "expected_behavior": "应激活 separation-of-tasks, 询问用户辞职的后果由谁承担，指出父母生气是父母的课题。",
+      "notes": "正面场景: 讨好型内耗，害怕评价，让别人干涉自己的课题。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "我每天逼着我儿子写作业，都是为了他好，但他就是不听话，气死我了。",
+      "expected_behavior": "应激活 separation-of-tasks, 指出学习是孩子的课题，家长不能代替孩子承担后果，停止妄加干涉。",
+      "notes": "正面场景: 控制欲受挫，打着“为你好”的旗号干涉他人的课题。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "我闺蜜找了个渣男，我怎么劝她都不分，我都替她着急，甚至想跟她绝交了。",
+      "expected_behavior": "应激活 separation-of-tasks, 告知用户跟谁谈恋爱是闺蜜的课题，你可以提供建议，但不能替她做决定。",
+      "notes": "正面场景: 越界干涉他人的课题，因他人的课题产生人际纠缠。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "我在公司里总是觉得自己是个受害者，我觉得是因为童年我父母经常吵架，导致我现在这么自卑不敢表现。",
+      "expected_behavior": "不应激活 separation-of-tasks, 应激活 teleological-reframing。",
+      "notes": "跨 skill 混淆诱饵: 涉及内在的心理创伤和受害者心态（原因论），而不是当下的人际边界问题，需要用目的论重构。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "我们部门的后端工程师昨天没按约定把接口给我，导致我今天不能发版，这是他的课题还是我的课题？",
+      "expected_behavior": "不应激活 separation-of-tasks，应按工作契约和协同规则处理。",
+      "notes": "诱饵: 契约/法律责任明确的事务，不能简单用“课题分离”来推脱责任。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "我老婆最近总是失眠，我很想帮她，但不知道该怎么办。如果我提出带她去看医生，算不算干涉她的课题？",
+      "expected_behavior": "应当明确指出提供帮助、建议和关心是你的课题，不算干涉；但最终是否去看医生是她的课题，你不能强迫。",
+      "notes": "边界: 区分“提供支持/关心”与“妄加干涉”，课题分离不等于冷漠。"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "包含 3 条 should_trigger，2 条 should_not_trigger (其中1条是 teleological-reframing 诱饵，1条是契约责任边界诱饵)，1 条 edge_case"
+}

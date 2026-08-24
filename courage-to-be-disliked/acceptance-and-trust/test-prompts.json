@@ -1,0 +1,52 @@
+{
+  "skill": "acceptance-and-trust",
+  "version": "0.1.0",
+  "source_book": "《被讨厌的勇气》 — 岸见一郎；古贺史健",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "我总是担心谈恋爱的时候对方出轨，每天都要查他手机找线索才能安心。",
+      "expected_behavior": "应激活 acceptance-and-trust, 引导用户区分信用与信赖，指出寻找不背叛的证据是内耗，对方是否背叛是他人的课题。",
+      "notes": "正面场景: 害怕背叛，在人际关系中防备心重，基于证据建立关系。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "我觉得只要我再瘦10斤，考上那个证书，我就能自信地去社交了，现在这个样子太丢人了不想见人。",
+      "expected_behavior": "应激活 acceptance-and-trust, 破除条件预设，引导用户诚实接纳现在不满意的自己，并基于现状行动。",
+      "notes": "正面场景: 无法接纳真实的自己，用未来条件逃避当下的行动。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "每天早上我都对着镜子喊'你是最棒的'，但一到上台演讲我还是紧张得发抖，结束后觉得自己是个废物。",
+      "expected_behavior": "应激活 acceptance-and-trust, 指出这是虚假的自我肯定，引导用户转向自我接纳，接受自己就是会紧张的事实。",
+      "notes": "正面场景: 陷入虚假的自我肯定与完美主义，导致反噬内耗。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "我借了亲戚5万块钱，他一直拖着不还，现在连我微信都不回了，我准备去起诉他。",
+      "expected_behavior": "不应激活本 skill, 因为涉及实质性财产纠纷，属于信用和法律契约范畴，不能用'无条件信赖'去解决。",
+      "notes": "诱饵: 财务/法律纠纷，必须基于客观信用而非无条件信赖。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "我妈一直干涉我找对象，非逼着我回老家相亲，我都快被她烦死了，不知道怎么才能让她改变想法。",
+      "expected_behavior": "不应激活本 skill, 应激活 separation-of-tasks (课题分离矩阵)",
+      "notes": "跨 skill 混淆诱饵: 这是典型的人际边界入侵，试图改变他人，属于课题分离的范畴。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "我的创业合伙人最近做账有点含糊，每次问他都避重就轻，我不知道还该不该信任他继续合作。",
+      "expected_behavior": "如果纠结商业财务机制，不应调用（需要审计信用体系）；如果纠结内心一直猜忌很痛苦，可调用本skill区分'财务上的查账(信用)'与'把对方当伙伴而不是敌人(信赖)'。",
+      "notes": "边界: 商业场景与人际内耗混合。商业本身必须讲信用，但在心态上如何面对合伙人涉及信赖。"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "至少 3 条 should_trigger + 2 条 should_not_trigger + 1 条 edge_case。全部 should_not_trigger 必须通过 (诱饵容错为 0), 且其中至少 1 条是同书兄弟 skill 的场景 (跨 skill 混淆测试)。"
+}

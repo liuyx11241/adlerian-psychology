@@ -1,0 +1,52 @@
+{
+  "skill": "teleological-reframing",
+  "version": "0.1.0",
+  "source_book": "《被讨厌的勇气》 — 【日】岸见一郎；古贺史健",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "原生家庭毁了我，如果不是我爸妈从小打压我、否定我，我现在肯定能自信地申请好学校和好工作，现在我只能一事无成地躺平了。",
+      "expected_behavior": "应激活 teleological-reframing, 指出用户是为了“不申请、不面对失败风险”这个目的，而把原生家庭的打压当做了借口。",
+      "notes": "典型场景：将现在的无行动力完全归咎于不可控的过去（原生家庭）。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "我刚才又跟同事大吵了一架。我就是这个暴脾气，当时火气上来了根本控制不住，事后我也很后悔，但我真的没办法。",
+      "expected_behavior": "应激活 teleological-reframing, 揭示愤怒并非不可抗力的情绪，而是为了快速支配或震慑同事而主动使用的工具。",
+      "notes": "典型场景：声称自己被情绪（如愤怒）控制，将其视为无法管理的外力。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "因为我之前创业失败过一次，留下了很深的心理阴影，所以我现在再也不敢接手任何有挑战性的新项目了。",
+      "expected_behavior": "应激活 teleological-reframing, 引导用户看到“不再敢接手新项目”并非创伤的必然结果，而是为了避免再次失败而制造的“不改变”的目的。",
+      "notes": "典型场景：用过往的失败经历（创伤）作为逃避当前挑战的理由。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "我最近经历了车祸，经常半夜惊醒，伴随强烈的心悸和濒死感，医生说这可能是创伤后应激障碍（PTSD），我该怎么办？",
+      "expected_behavior": "不应激活本 skill，因为这是真实的生理/精神疾病急性期反应，需要专业医疗介入，不能用目的论将其强行解构。",
+      "notes": "诱饵：纯医疗/真实物理创伤场景（触及了边界条件）。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "我妈非要干涉我的志愿填报，天天给我打电话哭诉，如果我不听她的她就不认我这个女儿。我觉得好烦，我该怎么让她别管我？",
+      "expected_behavior": "不应激活本 skill，应激活 separation-of-tasks（课题分离）。",
+      "notes": "跨 skill 混淆诱饵：用户遇到了人际边界问题。虽然涉及原生家庭（父母），但核心问题是谁来承担选择的后果（课题分离），而不是用户用家庭作为不努力的借口。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "老板天天让我无偿加班，如果不做就威胁开除我，并在行业里封杀我。我因为害怕一直没敢反抗，每天都很痛苦但没办法，我觉得我的人生完蛋了。",
+      "expected_behavior": "不应简单粗暴地激活本 skill（或在激活时必须极为谨慎地附加前置条件）。这涉及真实的现实压迫和职场霸凌，单纯将其内部化为“为了留在舒适区而捏造恐惧”属于受害者有罪论，应建议寻求现实/法律援助。",
+      "notes": "边界：区分主观逃避（目的论适用）和客观极端压迫（需要现实干预）。"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "至少 3 条 should_trigger + 2 条 should_not_trigger + 1 条 edge_case。全部 should_not_trigger 必须通过 (诱饵容错为 0), 且其中至少 1 条是同书兄弟 skill 的场景 (跨 skill 混淆测试)。"
+}

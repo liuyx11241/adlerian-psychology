@@ -1,0 +1,52 @@
+{
+  "skill": "horizontal-feedback-loop",
+  "version": "0.1.0",
+  "source_book": "《被讨厌的勇气》 — 岸见一郎；古贺史健",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "我团队里有个新来的实习生，最近刚独立完成了一个小项目，做得不错，我该怎么表扬他，让他以后更有动力干活？",
+      "expected_behavior": "应激活 horizontal-feedback-loop, 并指出'表扬'其实是居高临下的操纵，引导用户转化为平等的感谢与确认贡献（例如'谢谢你完成这个项目，对团队帮了大忙'）。",
+      "notes": "职场场景，典型的想用表扬来激励/操纵下属行为。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "我儿子今天主动帮我洗了碗，平时他都不怎么干家务。我想顺势好好夸夸他，让他养成好习惯，有什么话术推荐吗？",
+      "expected_behavior": "应激活 horizontal-feedback-loop, 并提醒用户避免使用'你真棒'这种评价性词汇，建议直接表达感谢和主观喜悦。",
+      "notes": "亲子教育场景，试图通过表扬塑造孩子行为。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "老公今天难得下厨做饭，我想给他点反馈，让他能保持下去，但又怕说错话让他逆反，我该怎么沟通？",
+      "expected_behavior": "应激活 horizontal-feedback-loop, 引导用户放弃'让他保持下去'的操控目的，单纯基于横向关系表达感谢。",
+      "notes": "伴侣沟通场景，包含'怎么沟通/给反馈'的信号，同时有隐性操控动机。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "我提交的代码在 CI 里报了 lint 错误，你能帮我指出是哪几行缩进不对吗？",
+      "expected_behavior": "不应激活本 skill, 因为这属于客观事实与硬性标准的纠错。",
+      "notes": "诱饵: 纯客观事实纠错，无关人际沟通与评价。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "我儿子每天晚上写作业都要磨蹭到11点，我天天在旁边盯着、催着，累得半死他还不领情。我该怎么办？",
+      "expected_behavior": "不应激活本 skill, 应激活 separation-of-tasks",
+      "notes": "跨 skill 混淆诱饵: 防止同书 skill 互相抢调用。这是责任边界不清的问题，用户并未询问'如何评价/表扬'，而是陷入了越界干涉的痛苦。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "马上要写年底的绩效考核评语了，公司强制要求必须给下属分级，还要写明他们的优缺点。这怎么可能不评价人呢？",
+      "expected_behavior": "不强求完全使用横向沟通法。因为这是企业体制内的硬性评价任务（强纵向环境），可以提及横向沟通，但应承认其在绩效考评中的局限性。",
+      "notes": "边界: 在强纵向企业文化中，面临不得不执行的硬性考核任务。"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "至少 3 条 should_trigger + 2 条 should_not_trigger + 1 条 edge_case。全部 should_not_trigger 必须通过 (诱饵容错为 0), 且其中至少 1 条是同书兄弟 skill 的场景 (跨 skill 混淆测试)。"
+}
